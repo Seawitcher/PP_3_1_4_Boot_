@@ -1,11 +1,13 @@
 package ru.kata.spring.boot_security.demo.DAO;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.User;
 
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 @Repository
 public class UserDAOImpl implements UserDAO{
@@ -36,5 +38,18 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public void editUser(User user) {
         entityManager.merge(user);
+    }
+
+    @Override
+    public UserDetails getUser(String username) {
+        TypedQuery<User> query = entityManager.createQuery(
+                "SELECT u FROM User u WHERE u.name = :username", User.class);
+        User user = query.setParameter("username", username)
+                 .getSingleResult();
+        return user;
+//        String sql = "select * from User where name?=" + username;
+//        return entityManager.createQuery(sql).getSingleResult();
+
+
     }
 }

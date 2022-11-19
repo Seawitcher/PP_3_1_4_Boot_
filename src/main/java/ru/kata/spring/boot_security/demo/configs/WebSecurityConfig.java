@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.configs;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -28,6 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        this.userService = userService;
 //        this.successUserHandler = successUserHandler;
 //    }
+
 public WebSecurityConfig(UserDetailsService userService) {
     this.userService = userService;
 
@@ -37,41 +39,41 @@ public WebSecurityConfig(UserDetailsService userService) {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                //Доступ только для не зарегистрированных пользователей
-                .antMatchers("/registration").not().fullyAuthenticated()
-                //Доступ только для пользователей с ролью Администратор
-                .antMatchers("/admin/").hasRole("ADMIN")
-                .antMatchers("/user").hasAnyRole("USER", "ADMIN")
-                //Доступ разрешен всем пользователей
-                .antMatchers("/", "/resources/").permitAll()
-                //Все остальные страницы требуют аутентификации
-                .anyRequest().authenticated()
-                .and()
-                //Настройка для входа в систему
-                .formLogin()
-                .loginPage("/login")
-                //Перенарпавление на главную страницу после успешного входа
-                .successHandler(new SuccessUserHandler())
-                .permitAll()
-                .and()
-                .logout()
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/");
 //        http
+//                .csrf().disable()
 //                .authorizeRequests()
-//                .antMatchers("/", "/index").permitAll()
+//                //Доступ только для не зарегистрированных пользователей
+//                .antMatchers("/registration").not().fullyAuthenticated()
+//                //Доступ только для пользователей с ролью Администратор
+//                .antMatchers("/admin/").hasRole("ADMIN")
+//                .antMatchers("/user").hasAnyRole("USER", "ADMIN")
+//                //Доступ разрешен всем пользователей
+//                .antMatchers("/", "/resources/").permitAll()
+//                //Все остальные страницы требуют аутентификации
 //                .anyRequest().authenticated()
 //                .and()
-//                .formLogin().successHandler(new SuccessUserHandler())
+//                //Настройка для входа в систему
+//                .formLogin()
+//                .loginPage("/login")
+//                //Перенарпавление на главную страницу после успешного входа
+//                .successHandler(new SuccessUserHandler())
 //                .permitAll()
 //                .and()
 //                .logout()
-//                .permitAll();
+//                .invalidateHttpSession(true)
+//                .clearAuthentication(true)
+//                .deleteCookies("JSESSIONID")
+//                .logoutSuccessUrl("/");
+        http
+                .authorizeRequests()
+                .antMatchers("/", "/index").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().successHandler(new SuccessUserHandler())
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
     }
 
 //    @Bean
