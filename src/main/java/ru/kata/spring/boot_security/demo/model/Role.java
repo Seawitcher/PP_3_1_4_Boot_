@@ -14,7 +14,7 @@ import java.util.Set;
 @Table(name = "role")
 public class Role implements GrantedAuthority {
     @Id
-    private Long id;
+    private long id;
     private String name;
 
     @Transient
@@ -24,16 +24,16 @@ public class Role implements GrantedAuthority {
     public Role() {
     }
 
-    public Role(Long id, String name) {
+    public Role(long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

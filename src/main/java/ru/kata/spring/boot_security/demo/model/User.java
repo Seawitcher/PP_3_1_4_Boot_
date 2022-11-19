@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.util.Collection;
@@ -27,7 +29,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private long id;
     @Column(name = "name")
     private String name;
     @Column(name = "last_name")
@@ -41,7 +43,7 @@ public class User implements UserDetails {
 //    @Column(name = "roles")
 //    private String roles;
 
-    @ManyToMany (fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
     public User() {
@@ -82,11 +84,11 @@ public class User implements UserDetails {
         return true;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -128,5 +130,9 @@ public class User implements UserDetails {
 
     public Set<Role> getRoles() {
         return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
