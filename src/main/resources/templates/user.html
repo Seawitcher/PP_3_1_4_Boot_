@@ -1,11 +1,56 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
-    <title>Spring Security Example</title>
+    <meta charset="UTF-8">
+    <title>All people</title>
 </head>
 <body>
-<h1>User, welcome spring boot security page!</h1>
 
+<div>
+
+    <table border="1">
+        <caption>
+            <h3>All users</h3>
+        </caption>
+        <tr>
+            <colgroup>
+                <col span="8" style="background-color: cornflowerblue">
+            </colgroup>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Lastname</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Roles</th>
+
+            <th>Action</th>
+        </tr>
+        <tr th:each="user : ${userList}">
+            <td th:utext="${user.getId()}">VALUE</td>
+            <td th:utext="${user.getName()}">VALUE</td>
+            <td th:utext="${user.getLastname()}">VALUE</td>
+            <td th:utext="${user.getAge()}">VALUE</td>
+            <td th:utext="${user.getEmail()}">VALUE</td>
+            <td th:utext="${user.getPassword()}">VALUE</td>
+            <td th:utext="${user.getRoles()}">VALUE</td>
+
+            <td>
+                <a th:href="@{/editUser/{id}(id=${user.getId()})}">
+                    <input type="submit" value="EDIT"/>
+                </a>
+                <br>
+                <form th:method="DELETE" th:action="@{/delete/{id}(id=${user.getId()})}">
+                    <input type="submit" value="DELETE"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <form method="GET" action="/newAddUser">
+        <button type="submit">ADD</button>
+    </form>
+</div>
 
 </body>
 </html>
