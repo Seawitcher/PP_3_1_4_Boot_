@@ -15,7 +15,7 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/api")
 public class UserController {
     @Autowired
     private final UserService userService;
@@ -39,26 +39,26 @@ public class UserController {
         return "user_info";
     }
 
-    @PostMapping
+    @PostMapping("/newAddUser")
     public String saveNewUser (@ModelAttribute("user") User user) {
         userService.add(user);
-        return "redirect:/";
+        return "redirect:/api";
     }
-    @DeleteMapping("delete/{id}")
-    public String deleteUser(@PathVariable("id") long id) {
-        userService.deleteUser(id);
-        return "redirect:/";
-    }
-    @GetMapping("/editUser/{id}")
-    public String editUser (Model model, @PathVariable("id") long id) {
-
-        model.addAttribute("user", userService.getUser(id));
-        return "user_info";
-    }
-    @PatchMapping("{id}")
-    public String userSaveEdit (@PathVariable("id") long id, @ModelAttribute("user") User user) {
-       userService.editUser(user);
-        return "redirect:/";
-    }
+//    @DeleteMapping("delete/{id}")
+//    public String deleteUser(@PathVariable("id") long id) {
+//        userService.deleteUser(id);
+//        return "redirect:/";
+//    }
+//    @GetMapping("/editUser/{id}")
+//    public String editUser (Model model, @PathVariable("id") long id) {
+//
+//        model.addAttribute("user", userService.getUser(id));
+//        return "user_info";
+//    }
+//    @PatchMapping("{id}")
+//    public String userSaveEdit (@PathVariable("id") long id, @ModelAttribute("user") User user) {
+//       userService.editUser(user);
+//        return "redirect:/";
+//    }
 
 }
