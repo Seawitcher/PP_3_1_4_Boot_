@@ -15,8 +15,8 @@ public class RoleDAOImpl implements RoleDAO {
 
 
     @Override
-    public boolean add(Role user) {
-        entityManager.persist(user);
+    public boolean add(Role role) {
+        entityManager.persist(role);
         return true;
     }
     @Override
