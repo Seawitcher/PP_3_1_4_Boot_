@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.DAO;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.User;
@@ -12,8 +13,13 @@ import java.util.List;
 @Repository
 public class UserDAOImpl implements UserDAO{
 
-    @PersistenceContext
+   // @PersistenceContext
+
     private EntityManager entityManager;
+
+    public UserDAOImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     @Override
     public void add(User user) {
