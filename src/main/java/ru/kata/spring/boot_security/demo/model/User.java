@@ -40,8 +40,6 @@ public class User implements UserDetails {
     private String email;
     @Column(name = "password")
     private String password;
-//    @Column(name = "roles")
-//    private String roles;
 
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
@@ -49,13 +47,13 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(long id, String name, String lastname, int age, String email, String password) {
-        this.id = id;
+    public User(String name, String lastname, int age, String email, String password, Set<Role> roles) {
         this.name = name;
         this.lastname = lastname;
         this.age = age;
         this.email = email;
         this.password = password;
+        this.roles = roles;
     }
 
     @Override

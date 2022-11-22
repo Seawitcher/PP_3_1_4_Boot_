@@ -15,27 +15,35 @@ import java.util.Set;
 @Component
 public class Init {
 
-
-
-        private UserService userService;
-        private RoleService roleService;
+    private UserService userService;
+    private RoleService roleService;
 
     @Autowired
     public Init(UserService userService, RoleService roleService) {
-            this.userService = userService;
-            this.roleService = roleService;
-        }
+        this.userService = userService;
+        this.roleService = roleService;
+    }
 
 
-        @EventListener(ApplicationReadyEvent.class)
-        public void createTable () {
-            roleService.add(new Role(1, "ADMIN"));
-            roleService.add(new Role(2, "USER"));
-            Set<Role> setRole = new HashSet<>();
-            setRole.add(roleService.getRole(1));
-            User user1 = new User(1, "Alex", "Zer", 20,
-                    "sea@yan.ru", "$2a$12$nNj251hCDwafhk/uGw2Wtehm7whW7QWOx6rdmxLKliLl5X8QbUSC.");
-            user1.setRoles(setRole);
-            userService.add(user1);
+    @EventListener(ApplicationReadyEvent.class)
+    public void createTable() {
+
+        if (roleService.getList().isEmpty()) {
+            Role admin = new Role(1L, "ROLE_ADMIN");
+            Role user = new Role(2L, "ROLE_USER");
+
+            roleService.add(admin);
+            roleService.add(user);
+
+            Set<Role> roles = new HashSet<>();
+            roles.add(admin);
+
+            User newAdmin = new User("ADMIN", "ADMIN", 20, "ADMIN@yan.ru",
+                    "$2a$12$Q2qTTtELnCTIiCzofXjSbudGjEoVCndDdMWEWjfi8CvlCs7.2UbYm", roles);
+            userService.add(newAdmin);
+
+            System.out.println("hello, I have just create few users: \n" +
+                    "username: ADMIN      password: ADMIN ");
         }
     }
+}
