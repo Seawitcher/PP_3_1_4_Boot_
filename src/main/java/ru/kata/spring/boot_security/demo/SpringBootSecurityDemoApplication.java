@@ -13,15 +13,9 @@ import javax.persistence.PersistenceUnit;
 
 @SpringBootApplication
 public class SpringBootSecurityDemoApplication {
-
 	public static void main(String[] args) {
 				SpringApplication.run(SpringBootSecurityDemoApplication.class, args);
 
-
-
-
-
-		//new Init(new UserServiceImpl(new UserDAOImpl(entityManager)),new RoleServiceImpl(new RoleDAOImpl())).createTable();
 	}
 
 }
