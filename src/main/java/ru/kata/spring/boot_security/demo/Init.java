@@ -29,13 +29,17 @@ public class Init {
 
         @EventListener(ApplicationReadyEvent.class)
         public void createTable () {
-            roleService.add(new Role(1, "ADMIN"));
-            roleService.add(new Role(2, "USER"));
-            Set<Role> setRole = new HashSet<>();
-            setRole.add(roleService.getRole(1));
-            User user1 = new User(1, "Alex", "Zer", 20,
-                    "sea@yan.ru", "$2a$12$nNj251hCDwafhk/uGw2Wtehm7whW7QWOx6rdmxLKliLl5X8QbUSC.");
-            user1.setRoles(setRole);
-            userService.add(user1);
+            if (roleService.getList().isEmpty()) {
+                Role admin = new Role(1L, "ROLE_ADMIN");
+                Role user = new Role(2L, "ROLE_USER");
+                roleService.add(admin);
+                roleService.add(user);
+                Set<Role> setRole = new HashSet<>();
+                setRole.add(admin);
+                User newAdmin = new User("Alex", "Zer", 20,
+                        "sea@yan.ru", "$2a$12$nNj251hCDwafhk/uGw2Wtehm7whW7QWOx6rdmxLKliLl5X8QbUSC.", setRole);
+
+                userService.add(newAdmin);
+            }
         }
     }
