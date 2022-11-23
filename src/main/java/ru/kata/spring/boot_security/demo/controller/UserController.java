@@ -46,18 +46,18 @@ public class UserController {
         userService.add(user);
         return "redirect:/api";
     }
-//    @DeleteMapping("delete/{id}")
-//    public String deleteUser(@PathVariable("id") long id) {
-//        userService.deleteUser(id);
-//        return "redirect:/";
-//    }
-    @GetMapping("/api/editUser/{id}")
+    @DeleteMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") long id) {
+        userService.deleteUser(id);
+        return "redirect:/api";
+    }
+    @GetMapping("/editUser/{id}")
     public String editUser (Model model, @PathVariable("id") long id) {
 
         model.addAttribute("user", userService.getUser(id));
         return "user_edit";
     }
-    @PatchMapping("/api/{id}")
+    @PatchMapping("/{id}")
     public String userSaveEdit (@PathVariable("id") long id, @ModelAttribute("user") User user) {
        userService.editUser(user);
         return "redirect:/api";
