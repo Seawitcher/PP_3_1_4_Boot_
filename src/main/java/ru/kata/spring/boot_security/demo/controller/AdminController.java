@@ -14,55 +14,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
-
 @Controller
-@RequestMapping("/api")
-public class UserController {
+@RequestMapping("/admin")
+public class AdminController {
 
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-
     @Autowired
-    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+    public AdminController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
-
-
     @GetMapping
     public String getUser(Model model) {
         model.addAttribute("userList", userService.getList());
-        return "user";
+        return "user_admin";
     }
 
-    @GetMapping("/newAddUser")
+    @GetMapping("/newAddUserAdmin")
     public String addNewUser(Model model) {
-       User user = new User();
+        User user = new User();
         model.addAttribute("user", user);
-        return "user_info";
+        return "user_new_admin";
     }
 
-    @PostMapping("/newAddUser")
+    @PostMapping("/newAddUserAdmin")
     public String saveNewUser (@ModelAttribute("user") User user) {
+       user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.add(user);
-        return "redirect:/api";
+        return "redirect:/admin";
     }
     @DeleteMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         userService.deleteUser(id);
-        return "redirect:/api";
+        return "redirect:/admin";
     }
     @GetMapping("/editUser/{id}")
     public String editUser (Model model, @PathVariable("id") long id) {
 
         model.addAttribute("user", userService.getUser(id));
-        return "user_edit";
+        return "user_edit_admin";
     }
     @PatchMapping("/{id}")
     public String userSaveEdit (@PathVariable("id") long id, @ModelAttribute("user") User user) {
-       userService.editUser(user);
-        return "redirect:/api";
+        userService.editUser(user);
+        return "redirect:/admin";
     }
-
 }

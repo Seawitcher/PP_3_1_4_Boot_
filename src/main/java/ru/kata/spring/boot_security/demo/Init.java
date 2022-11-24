@@ -40,6 +40,9 @@ public class Init {
                         "sea@yan.ru", "$2a$12$nNj251hCDwafhk/uGw2Wtehm7whW7QWOx6rdmxLKliLl5X8QbUSC.", setRole);
 
                 userService.add(newAdmin);
+
+                System.out.println("hello, I have just create few users: \n" +
+                        "username: Alex      password: 1 \n");
             }
         }
     }
