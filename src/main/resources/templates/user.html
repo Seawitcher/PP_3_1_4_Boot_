@@ -33,7 +33,9 @@
             <td th:utext="${user.getAge()}">VALUE</td>
             <td th:utext="${user.getEmail()}">VALUE</td>
             <td th:utext="${user.getPassword()}">VALUE</td>
-            <td th:utext="${user.getRoles()}">VALUE</td>
+            <td>
+                <div th:each="role:${user.getRoles()}">[[${role.getName()}]]</div>
+            </td>
 
             <td>
                 <a th:href="@{/api/editUser/{id}(id=${user.getId()})}">
