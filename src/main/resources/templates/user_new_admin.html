@@ -26,6 +26,16 @@
 <!--        <label for="roles">Roles: </label>-->
 <!--        <input type="text" th:field="*{roles}" id="roles"/>-->
 <!--        <br>-->
+        <p>
+            <label>Roles
+                <input type="checkbox" name="roleList"
+                       th:each="role : ${roleList}"
+                       th:text="${role.name}"
+                       th:value="${role.id}"
+                       th:field="*{roles}"
+                />
+            </label>
+        </p>
         <br>
         <input type="submit" value="CREATE!"/>
     </form>

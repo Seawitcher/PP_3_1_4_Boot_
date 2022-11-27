@@ -21,4 +21,8 @@ public interface RoleDAO {
     void deleteRole(long id);
 
     void editRole(Role role);
+
+    List<Role> listByName(List<String> name);
+
+    Role findByName(String name);
 }

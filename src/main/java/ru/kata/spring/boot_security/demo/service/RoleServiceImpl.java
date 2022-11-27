@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.DAO.RoleDAO;
-import ru.kata.spring.boot_security.demo.DAO.UserDAO;
 import ru.kata.spring.boot_security.demo.model.Role;
-import ru.kata.spring.boot_security.demo.model.User;
 
 import java.util.List;
 @Service
@@ -53,5 +51,10 @@ public class RoleServiceImpl implements RoleService {
     @Transactional
     public void editRole(Role role) {
         roleDAO.editRole (role);
+    }
+    @Override
+    @Transactional
+    public List<Role> listByRole(List<String> name) {
+        return roleDAO.listByName(name);
     }
 }
