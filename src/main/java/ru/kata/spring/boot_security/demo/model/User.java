@@ -20,6 +20,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,7 +30,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "last_name")
@@ -44,12 +45,12 @@ public class User implements UserDetails {
 //    private String roles;
 
     @OneToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles;
+    private List<Role> roles;
 
     public User() {
     }
 
-    public User(String name, String lastname, int age, String email, String password, Set<Role> roles) {
+    public User(String name, String lastname, int age, String email, String password, List<Role> roles) {
         this.name = name;
         this.lastname = lastname;
         this.age = age;
@@ -58,7 +59,7 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public User(long id, String name, String lastname, int age, String email, String password) {
+    public User(Long id, String name, String lastname, int age, String email, String password) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
@@ -102,11 +103,11 @@ public class User implements UserDetails {
         return true;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -146,11 +147,24 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && age == user.age && Objects.equals(name, user.name) && Objects.equals(lastname, user.lastname) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, lastname, age, email, password);
     }
 }

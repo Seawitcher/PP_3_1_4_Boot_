@@ -17,20 +17,14 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserDAO userDAO;
-    private final RoleDAO roleDAO;
 
 
     @Autowired
-    public UserServiceImpl(UserDAO userDAO, RoleDAO roleDAO) {
+    public UserServiceImpl(UserDAO userDAO) {
         this.userDAO = userDAO;
-        this.roleDAO = roleDAO;
+
     }
 
-    @Override
-    @Transactional
-    public List<Role> listRoles() {
-        return roleDAO.getList();
-    }
 
     @Override
     @Transactional
@@ -46,13 +40,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User getUser(long id) {
+    public User getUser(Long id) {
         return userDAO.getUser(id);
     }
 
     @Override
     @Transactional
-    public void deleteUser(long id) {
+    public void deleteUser(Long id) {
         userDAO.deleteUser(id);
 
     }

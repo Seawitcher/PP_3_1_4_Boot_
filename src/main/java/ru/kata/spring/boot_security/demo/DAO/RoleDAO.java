@@ -10,7 +10,7 @@ public interface RoleDAO {
 
 //    List<Role> getRoleList();
 
-    Role getRole(long id);
+    Role getRole(Long id);
 //
 //    Role findByName(String name);
 //
@@ -18,7 +18,7 @@ public interface RoleDAO {
 
     List<Role> getList();
 
-    void deleteRole(long id);
+    void deleteRole(Long id);
 
     void editRole(Role role);
 

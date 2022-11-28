@@ -15,8 +15,8 @@ public interface UserDAO {
 
     public void add(User user);
     public List<User> getList();
-    public User getUser(long id);
-    public void deleteUser(long id);
+    public User getUser(Long id);
+    public void deleteUser(Long id);
     public void editUser(User user);
 
    public UserDetails getUser(String username);

@@ -42,9 +42,9 @@ public class AdminController {
     }
 
     @GetMapping("/newAddUserAdmin")
-    public String addNewUser( Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
+    public String addNewUser(Model model) {
+      User user = new User();
+       model.addAttribute("user", user);
 
        List<Role> roles = roleService.getList();
         model.addAttribute("roleList", roles);
@@ -57,7 +57,7 @@ public class AdminController {
 //        List<String> lsr = user.getRoles().stream().map(r -> r.getName()).collect(Collectors.toList());
 //        List<Role> liRo = roleService.listByRole(lsr);
 
-        user.setRoles((Set<Role>) roles);
+        user.setRoles(roles);
 //        user.setRoles((Set<Role>) liRo);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.add(user);
@@ -65,20 +65,20 @@ public class AdminController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") long id) {
+    public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/admin";
     }
 
     @GetMapping("/editUser/{id}")
-    public String editUser(Model model, @PathVariable("id") long id) {
+    public String editUser(Model model, @PathVariable("id") Long id) {
 
         model.addAttribute("user", userService.getUser(id));
         return "user_edit_admin";
     }
 
     @PatchMapping("/{id}")
-    public String userSaveEdit(@PathVariable("id") long id, @ModelAttribute("user") User user) {
+    public String userSaveEdit(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
         userService.editUser(user);
         return "redirect:/admin";
     }

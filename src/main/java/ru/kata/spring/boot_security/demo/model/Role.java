@@ -8,13 +8,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "role")
 public class Role implements GrantedAuthority {
     @Id
-    private long id;
+    private Long id;
     private String name;
 
     @Transient
@@ -24,16 +25,16 @@ public class Role implements GrantedAuthority {
     public Role() {
     }
 
-    public Role(long id, String name) {
+    public Role(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -61,5 +62,18 @@ public class Role implements GrantedAuthority {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role = (Role) o;
+        return id == role.id && Objects.equals(name, role.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }

@@ -11,8 +11,8 @@ public interface RoleService  {
 
     public boolean add(Role role);
     public List<Role> getList();
-    public Role getRole(long id);
-    public void deleteRole(long id);
+    public Role getRole(Long id);
+    public void deleteRole(Long id);
     public void editRole(Role role);
 
     @Transactional

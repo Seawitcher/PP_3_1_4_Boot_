@@ -26,12 +26,12 @@ public class RoleDAOImpl implements RoleDAO {
     }
 
     @Override
-    public Role getRole(long id) {
+    public Role getRole(Long id) {
         return entityManager.find(Role.class, id);
     }
 
     @Override
-    public void deleteRole(long id) {
+    public void deleteRole(Long id) {
         entityManager.remove(getRole(id));
     }
 

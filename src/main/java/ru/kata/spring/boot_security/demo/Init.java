@@ -9,7 +9,9 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -34,7 +36,7 @@ public class Init {
                 Role user = new Role(2L, "ROLE_USER");
                 roleService.add(admin);
                 roleService.add(user);
-                Set<Role> setRole = new HashSet<>();
+                List<Role> setRole = new ArrayList<>();
                 setRole.add(admin);
                 User newAdmin = new User("Alex", "Zer", 20,
                         "sea@yan.ru", "$2a$12$nNj251hCDwafhk/uGw2Wtehm7whW7QWOx6rdmxLKliLl5X8QbUSC.", setRole);
