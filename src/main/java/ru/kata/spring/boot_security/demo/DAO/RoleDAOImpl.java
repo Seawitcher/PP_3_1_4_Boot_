@@ -22,7 +22,7 @@ public class RoleDAOImpl implements RoleDAO {
     }
     @Override
     public List<Role> getList() {
-        return entityManager.createQuery("select r from Role r", Role.class).getResultList();
+        return entityManager.createQuery("select s from Role s", Role.class).getResultList();
     }
 
     @Override

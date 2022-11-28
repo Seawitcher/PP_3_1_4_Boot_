@@ -42,21 +42,23 @@ public class AdminController {
     }
 
     @GetMapping("/newAddUserAdmin")
-    public String addNewUser(Model model) {
+    public String addNewUser( Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        List<Role> roles = roleService.getList();
+
+       List<Role> roles = roleService.getList();
         model.addAttribute("roleList", roles);
+//        model.addAttribute("roleList", roles);
         return "user_new_admin";
     }
 
     @PostMapping("/newAddUserAdmin")
-    public String saveNewUser( User user) {
-        List<String> lsr = user.getRoles().stream().map(r -> r.getName()).collect(Collectors.toList());
-        List<Role> liRo = roleService.listByRole(lsr);
+    public String saveNewUser( @ModelAttribute("user") User user, @ModelAttribute("roleList") List<Role> roles) {
+//        List<String> lsr = user.getRoles().stream().map(r -> r.getName()).collect(Collectors.toList());
+//        List<Role> liRo = roleService.listByRole(lsr);
 
-      //  user.setRoles((Set<Role>) roles);
-        user.setRoles((Set<Role>) liRo);
+        user.setRoles((Set<Role>) roles);
+//        user.setRoles((Set<Role>) liRo);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.add(user);
         return "redirect:/admin";
