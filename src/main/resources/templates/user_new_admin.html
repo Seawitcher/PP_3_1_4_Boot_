@@ -30,8 +30,8 @@
             <label>Roles:
                 <input type="checkbox" name="roleList"
                        th:each="role : ${roleList}"
-                       th:text="${role.name}"
-                       th:value="${role.id}"
+                       th:text="${role.getNoPrefix()}"
+                       th:value="${role.name}"
                        th:field="*{roles}"
                 />
             </label>

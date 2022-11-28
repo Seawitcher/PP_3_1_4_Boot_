@@ -64,6 +64,11 @@ public class Role implements GrantedAuthority {
         return this.name;
     }
 
+    public String getNoPrefix() {
+        String pr = "ROLE_";
+        return name.substring(pr.length());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

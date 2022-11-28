@@ -56,9 +56,9 @@ public class AdminController {
     public String saveNewUser( @ModelAttribute("user") User user, @ModelAttribute("roleList") List<Role> roles) {
 //        List<String> lsr = user.getRoles().stream().map(r -> r.getName()).collect(Collectors.toList());
 //        List<Role> liRo = roleService.listByRole(lsr);
-
+//
+//        user.setRoles(liRo);
         user.setRoles(roles);
-//        user.setRoles((Set<Role>) liRo);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.add(user);
         return "redirect:/admin";
