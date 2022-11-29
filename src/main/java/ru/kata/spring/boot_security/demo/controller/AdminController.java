@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -53,12 +55,14 @@ public class AdminController {
     }
 
     @PostMapping("/newAddUserAdmin")
-    public String saveNewUser( @ModelAttribute("user") User user, @ModelAttribute("roleList") List<Role> roles) {
+    public String saveNewUser(
+            @ModelAttribute("user") User user
+            ) {
 //        List<String> lsr = user.getRoles().stream().map(r -> r.getName()).collect(Collectors.toList());
 //        List<Role> liRo = roleService.listByRole(lsr);
 //
 //        user.setRoles(liRo);
-        user.setRoles(roles);
+        //user.setRoles(roles);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.add(user);
         return "redirect:/admin";

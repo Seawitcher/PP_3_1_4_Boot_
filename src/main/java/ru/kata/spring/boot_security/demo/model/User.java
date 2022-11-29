@@ -45,6 +45,11 @@ public class User implements UserDetails {
 //    private String roles;
 
     @OneToMany(fetch = FetchType.EAGER)
+   // @ManyToMany(fetch = FetchType.EAGER)
+//    @ManyToMany(fetch=FetchType.LAZY)
+//    @JoinTable(name="users_roles",
+//            joinColumns = @JoinColumn( referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn( referencedColumnName = "id"))
     private List<Role> roles;
 
     public User() {

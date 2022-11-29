@@ -8,6 +8,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -20,7 +21,16 @@ public class Role implements GrantedAuthority {
 
     @Transient
     @ManyToOne
-    private User user;
+//@ManyToMany(mappedBy = "roles")
+   private User user;
+//
+//    public List<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(List<User> users) {
+//        this.users = users;
+//    }
 
     public Role() {
     }
