@@ -23,7 +23,7 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public void add(User user) {
-        entityManager.persist(user);
+        entityManager.merge(user);
     }
 
     @Override

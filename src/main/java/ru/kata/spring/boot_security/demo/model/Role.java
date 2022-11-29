@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -20,17 +21,17 @@ public class Role implements GrantedAuthority {
     private String name;
 
     @Transient
-    @ManyToOne
-//@ManyToMany(mappedBy = "roles")
-   private User user;
-//
-//    public List<User> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(List<User> users) {
-//        this.users = users;
-//    }
+//    @ManyToOne (cascade = CascadeType.ALL)
+@ManyToMany(mappedBy = "roles")
+   private Set <User> user;
+
+    public Set<User> getUsers() {
+        return user;
+    }
+
+    public void setUsers(Set<User> user) {
+        this.user = user;
+    }
 
     public Role() {
     }
@@ -56,13 +57,13 @@ public class Role implements GrantedAuthority {
         this.name = name;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     @Override
     public String getAuthority() {
@@ -82,13 +83,13 @@ public class Role implements GrantedAuthority {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Role)) return false;
         Role role = (Role) o;
-        return id == role.id && Objects.equals(name, role.name);
+        return Objects.equals(id, role.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id);
     }
 }
