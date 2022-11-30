@@ -78,6 +78,7 @@ public class AdminController {
     public String editUser(Model model, @PathVariable("id") Long id) {
 
         model.addAttribute("user", userService.getUser(id));
+        model.addAttribute("roleList",roleService.getList());
         return "user_edit_admin";
     }
 

@@ -27,17 +27,17 @@
 <!--        <input type="text" th:field="*{roles}" id="roles"/>-->
 <!--        <br>-->
         <p>
-            <label>Roles3
+            <label>Roles:
                 <input type="checkbox" name="roleList"
-                       th:each="rol : ${roleList}"
-                       th:text="${rol.getNoPrefix()}"
-                       th:value="${rol.role}"
+                       th:each="role : ${roleList}"
+                       th:text="${role.getNoPrefix()}"
+                       th:value="${role.id}"
                        th:field="*{roles}"
                 />
             </label>
         </p>
         <br>
-        <input type="submit" value="CREATE!"/>
+        <input type="submit" value="UPDATE!"/>
     </form>
 </div>
 </body>
