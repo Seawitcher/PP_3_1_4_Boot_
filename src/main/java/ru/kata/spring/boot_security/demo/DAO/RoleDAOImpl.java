@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public class RoleDAOImpl implements RoleDAO {
 
-    //@PersistenceContext
+
     @Autowired
     private EntityManager entityManager;
 
@@ -52,31 +52,7 @@ public class RoleDAOImpl implements RoleDAO {
                 .getResultList().stream().findAny().orElse(null);
     }
 
-//    @Override
-//    public List<Role> getRoleList() {
-//        return entityManager.createQuery("select r from Role r", Role.class).getResultList();
-//    }
-//
-//    @Override
-//    public Role getRole(long id) {
-//        return entityManager.find(Role.class, id);
-//    }
-//
-//
-//    @Override
-//    public Role findByName(String name) {
-//
-//        return entityManager.createQuery("SELECT u FROM Role u WHERE u.user.roles = :id", Role.class)
-//                .setParameter("id", name)
-//                .getResultList().stream().findAny().orElse(null);
-//    }
-//
-//    @Override
-//    public List<Role> listByName(List<String> name) {
-//        return entityManager.createQuery("SELECT u FROM Role u WHERE u.user.roles in (:id)", Role.class)
-//                .setParameter("id", name)
-//                .getResultList();
-//    }
+
 }
 
 

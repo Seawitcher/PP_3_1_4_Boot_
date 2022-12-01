@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.DAO;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
@@ -7,16 +8,17 @@ import ru.kata.spring.boot_security.demo.model.User;
 
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+
 import javax.persistence.TypedQuery;
 import java.util.List;
-@Repository
-public class UserDAOImpl implements UserDAO{
 
-   // @PersistenceContext
+@Repository
+public class UserDAOImpl implements UserDAO {
+
 
     private EntityManager entityManager;
 
+    @Autowired
     public UserDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
@@ -51,10 +53,8 @@ public class UserDAOImpl implements UserDAO{
         TypedQuery<User> query = entityManager.createQuery(
                 "SELECT u FROM User u WHERE u.name = :username", User.class);
         User user = query.setParameter("username", username)
-                 .getSingleResult();
+                .getSingleResult();
         return user;
-//        String sql = "select * from User where name?=" + username;
-//        return entityManager.createQuery(sql).getSingleResult();
 
 
     }

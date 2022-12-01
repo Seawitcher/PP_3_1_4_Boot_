@@ -8,13 +8,10 @@ public interface RoleDAO {
 
     boolean add(Role user);
 
-//    List<Role> getRoleList();
+
 
     Role getRole(Long id);
-//
-//    Role findByName(String name);
-//
-//    List<Role> listByName(List<String> name);
+
 
     List<Role> getList();
 

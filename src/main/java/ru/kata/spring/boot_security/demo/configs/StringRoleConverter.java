@@ -1,7 +1,7 @@
 package ru.kata.spring.boot_security.demo.configs;
 
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.core.convert.converter.GenericConverter;
+
 import ru.kata.spring.boot_security.demo.model.Role;
 
 public class StringRoleConverter implements Converter<String, Role> {

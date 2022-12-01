@@ -49,9 +49,14 @@
         </tr>
     </table>
     <br>
-<!--    <form method="GET" action="/api/newAddUser">-->
-        <h4><a href="/admin/newAddUserAdmin">ADD</a></h4>
-<!--    </form>-->
+
+    <h4><a href="/admin/newAddUserAdmin">ADD USER</a></h4>
+
+    <br>
+
+    <form name="logOut" th:action="@{/logout}" method="post">
+        <input type="submit" value="Exit">
+    </form>
 </div>
 
 </body>
