@@ -38,6 +38,8 @@ public class UserDAOImpl implements UserDAO {
         return entityManager.find(User.class, id);
     }
 
+
+
     @Override
     public void deleteUser(Long id) {
         entityManager.remove(getUser(id));
