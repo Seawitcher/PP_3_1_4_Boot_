@@ -15,6 +15,6 @@ public interface RoleService  {
     public void deleteRole(Long id);
     public void editRole(Role role);
 
-    @Transactional
+
     List<Role> listByRole(List<String> name);
 }

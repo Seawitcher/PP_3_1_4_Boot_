@@ -4,11 +4,13 @@ package ru.kata.spring.boot_security.demo.DAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
 
 import javax.persistence.EntityManager;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -16,7 +18,7 @@ import java.util.List;
 public class UserDAOImpl implements UserDAO {
 
 
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Autowired
     public UserDAOImpl(EntityManager entityManager) {
@@ -42,7 +44,38 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void deleteUser(Long id) {
-        entityManager.remove(getUser(id));
+        User user = entityManager.find(User.class, id);
+
+// get all books that this author wrote alone
+        Query q = entityManager.createNativeQuery("SELECT ur.role_id FROM user_roles ur JOIN role r ON ur.role_id = r.id JOIN user_roles ur2 ON r.id = ur2.role_id WHERE ur2.role_id = ? GROUP BY ur.role_id HAVING count(ur.user_id) = 1");
+        q.setParameter(1, user.getId());
+        List<Long> role_ids = (List<Long>)q.getResultList();
+
+// remove all associations for this author
+        q = entityManager.createNativeQuery("DELETE FROM user_roles ur WHERE ur.user_id = ?");
+        q.setParameter(1, user.getId());
+        q.executeUpdate();
+
+// remove all books that this author wrote alone
+        q = entityManager.createNativeQuery("DELETE FROM Role r WHERE r.id IN (:ids)");
+        q.setParameter("ids", role_ids);
+        q.executeUpdate();
+
+// remove author
+        q = entityManager.createNativeQuery("DELETE FROM Users u WHERE u.id IN (:id)");
+        q.setParameter("id", user.getId());
+        q.executeUpdate();
+
+  //      entityManager.remove(user);
+//        entityManager.createQuery(
+//                "DELETE r, u  FROM  User u JOIN u.roles r WHERE u.id = :id", User.class)
+//                .setParameter("id", id).executeUpdate();
+
+//        TypedQuery<User> query = entityManager.createQuery(
+//                "DELETE   FROM User u  WHERE u.id = :id", User.class).setParameter("id", id);
+//
+//                query.executeUpdate();
+//        entityManager.remove(getUser(id));
     }
 
     @Override
@@ -54,9 +87,11 @@ public class UserDAOImpl implements UserDAO {
     public UserDetails getUser(String username) {
         TypedQuery<User> query = entityManager.createQuery(
                 "SELECT u FROM User u WHERE u.name = :username", User.class);
-        User user = query.setParameter("username", username)
-                .getSingleResult();
-        return user;
+//        User user = query.setParameter("username", username)
+//                .getSingleResult();
+//        return user;
+        return query.setParameter("username", username)
+               .getSingleResult();
 
 
     }
