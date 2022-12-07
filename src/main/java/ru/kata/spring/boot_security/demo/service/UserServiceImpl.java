@@ -64,4 +64,11 @@ public class UserServiceImpl implements UserService {
         user.getRoles().size();
         return user;
     }
+    @Override
+    @Transactional
+    public User loadUserByUserEmail(String email)throws UsernameNotFoundException {
+        User user = (User)userDAO.getUserEmail(email);
+        user.getRoles().size();
+        return user;
+    }
 }

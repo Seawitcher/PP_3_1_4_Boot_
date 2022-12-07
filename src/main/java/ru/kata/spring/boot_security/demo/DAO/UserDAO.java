@@ -20,4 +20,6 @@ public interface UserDAO {
     public void editUser(User user);
 
    public UserDetails getUser(String username);
+
+    User getUserEmail(String email);
 }

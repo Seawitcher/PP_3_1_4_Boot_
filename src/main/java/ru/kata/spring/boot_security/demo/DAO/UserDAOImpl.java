@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.DAO;
 
 
-import org.hibernate.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
@@ -66,5 +65,13 @@ public class UserDAOImpl implements UserDAO {
         return entityManager.createQuery(
                         "SELECT u FROM User u WHERE u.name = :username", User.class).setParameter("username", username)
                 .getSingleResult();
+    }
+    @Override
+    public User getUserEmail(String email) {
+
+
+        return entityManager.createQuery(
+                        "SELECT u FROM User u WHERE u.email = :email", User.class).getSingleResult();
+//        return entityManager.find(User.class, email);
     }
 }

@@ -42,11 +42,16 @@ public WebSecurityConfig(UserDetailsService userService) {
                 .antMatchers("/user").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().successHandler(new SuccessUserHandler())
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
+                .formLogin(form ->form
+                        .usernameParameter("email")
+//                .formLogin()
+                .loginPage("/login")
+//                .usernameParameter("email")
+                .successHandler(new SuccessUserHandler())
+                .permitAll());
+//                .and()
+//                .logout()
+//                .permitAll());
     }
 
 //    @Bean
