@@ -20,6 +20,6 @@ public interface UserService extends UserDetailsService {
     public void deleteUser(Long id);
     public void editUser(User user);
 
-
+    UserDetails loadUserByUsername(String email) throws UsernameNotFoundException;
     User loadUserByUserEmail(String email)throws UsernameNotFoundException;
 }

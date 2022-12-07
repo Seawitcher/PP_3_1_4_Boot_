@@ -19,7 +19,7 @@ public interface UserDAO {
     public void deleteUser(Long id);
     public void editUser(User user);
 
-   public UserDetails getUser(String username);
+   public UserDetails getUser(String email);
 
     User getUserEmail(String email);
 }
